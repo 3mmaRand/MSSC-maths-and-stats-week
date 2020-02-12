@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ```{r packages}
 library(tidyverse)
-library(Rmisc)
+
 ```
 
 # Introduction
@@ -32,7 +32,7 @@ seal <- read.table("raw_data/seal.txt", header = TRUE)
 
 ```{r tidy}
 # put the data in tidy format
-seal2 <- gather(data = seal, species, myoglobin)
+seal2 <- gather(data = seal, key = species, value = myoglobin)
 
 # write tidy data to processed
 write.table(seal2, 
@@ -42,20 +42,23 @@ write.table(seal2,
 
 
 ```{r summarise}
-sealsummary <- summarySE(data = seal2,
-                         measurevar = "myoglobin",
-                         groupvars = "species")
+sealsummary <- seal2 %>% 
+  group_by(species) %>% 
+  summarise(mean = mean(myoglobin),
+            std = sd(myoglobin),
+            n = length(myoglobin),
+            se = std/sqrt(n))
 ```
 
 ```{r extract}
 # extract values for inline reporting
 
-highestmean <- max(sealsummary$myoglobin)
-highestse <- sealsummary$se[sealsummary$myoglobin == highestmean]
-highestspp <- sealsummary$species[sealsummary$myoglobin == highestmean]
-lowestmean <- min(sealsummary$myoglobin)
-lowestse <- sealsummary$se[sealsummary$myoglobin == lowestmean]
-lowestspp <- sealsummary$species[sealsummary$myoglobin == lowestmean]
+highestmean <- max(sealsummary$mean)
+highestse <- sealsummary$se[sealsummary$mean == highestmean]
+highestspp <- sealsummary$species[sealsummary$mean == highestmean]
+lowestmean <- min(sealsummary$mean)
+lowestse <- sealsummary$se[sealsummary$mean == lowestmean]
+lowestspp <- sealsummary$species[sealsummary$mean == lowestmean]
 
 ```
 
@@ -85,15 +88,20 @@ There is a significant difference in myoglobin concentration between species (_F
 
 ```{r myo-fig, fig.height=4, fig.width=4, fig.cap="Figure 1 Mean Myoglobin content of skeletal muscle"}
 
-ggplot(seal2, aes(x = species, y = myoglobin) ) +
-  geom_jitter(width = .2, colour = "#8c8c8c") +
+ggplot()  +
+  geom_jitter(data = seal2,
+              aes(x = species, y = myoglobin),
+                         width = .2,
+                  colour = "#8c8c8c") +
   geom_errorbar(data = sealsummary, 
-                aes(ymin = myoglobin, 
-                    ymax = myoglobin), 
-                width =.2, size = 1 ) + 
+                aes(x = species,
+                    ymin = mean, 
+                    ymax = mean), 
+                width = .2, size = 1 ) + 
   geom_errorbar(data = sealsummary, 
-                aes(ymin = myoglobin - se, 
-                    ymax = myoglobin + se), 
+                aes(x = species,
+                    ymin = mean - se, 
+                    ymax = mean + se), 
                 width = .3 ) +
   annotate("segment", x = 1, xend = 2, 
            y = 72, yend = 72,
@@ -112,9 +120,7 @@ ggplot(seal2, aes(x = species, y = myoglobin) ) +
   scale_x_discrete(labels = c("Bladdernose", 
                               "Harbour", 
                               "Weddell")) +
-  theme(panel.background = element_rect(fill = "white")) +
-  theme(axis.line.x = element_line(color = "black"),
-        axis.line.y = element_line(color = "black"))
+  theme_classic()
 
 
 ```

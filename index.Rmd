@@ -1,34 +1,53 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-  <head>
-    <title>An Introduction to R Markdown for Reproducible Analyses</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="Emma Rand" />
-    <meta name="date" content="2020-02-13" />
-    <link href="libs/remark-css/default.css" rel="stylesheet" />
-    <link rel="stylesheet" href="emma.css" type="text/css" />
-    <link rel="stylesheet" href="emma-fonts.css" type="text/css" />
-  </head>
-  <body>
-    <textarea id="source">
+---
+title: "An Introduction to R Markdown for Reproducible Analyses"
+subtitle: "Maths and Stats week 2020"
+author: "Emma Rand"
+institute: "University of York, UK"
+date: "2020-02-13"
+output:
+  xaringan::moon_reader:
+    css: [default, emma.css, emma-fonts.css]
+    lib_dir: libs
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      message = FALSE,	
+                      warning = FALSE)
+options(htmltools.dir.version = FALSE)
+```
+
+```{r packages, include=FALSE}
+library(RefManageR)
+library(kableExtra)
+library(tidyverse)
+```
 
 
-
-
-
-
-
-
+```{r, load-refs, include=FALSE, cache=FALSE}
+BibOptions(check.entries = FALSE,
+           bib.style = "authoryear",
+           cite.style = "authoryear",
+           style = "markdown",
+           hyperlink = FALSE,
+           dashed = FALSE)
+myBib <- ReadBib("references.bib", check = FALSE)
+```
 
 
 class: inverse
 
 # An Introduction to R Markdown for Reproducible Analyses
 
-### Emma Rand &lt;br&gt; emma.rand@york.ac.uk &lt;br&gt; University of York &lt;br&gt; 2020-02-13
+### Emma Rand <br> emma.rand@york.ac.uk <br> University of York <br> 2020-02-13
 
 .footnote[
-Made with xaringan (Xie, 2019)
+Made with xaringan `r Cite(myBib, "xaringan")`
 
 ]
 ---
@@ -36,8 +55,8 @@ Made with xaringan (Xie, 2019)
 # Goal!
 
 By the end of today you'll be able to do something like this:
-&lt;!-- standard markdown report in pdf, word or html --&gt;
-&lt;!-- include a table, inline code, a figure,  --&gt;
+<!-- standard markdown report in pdf, word or html -->
+<!-- include a table, inline code, a figure,  -->
 
 ## demo.....
 
@@ -57,13 +76,13 @@ Is an introduction to
 .pull-right[
 
 It is not
-* An introduction to statistics&lt;sup&gt;1&lt;/sup&gt;  
+* An introduction to statistics<sup>1</sup>  
 * Magic  
 
-&amp;nbsp;  
-&amp;nbsp;  
-&amp;nbsp;  
-&amp;nbsp;  
+&nbsp;  
+&nbsp;  
+&nbsp;  
+&nbsp;  
 
 ]
 
@@ -75,7 +94,7 @@ It is not
 ---
 # A little survey
 
-&lt;iframe src="https://forms.gle/EqQKx4nLQQemQZWb8" width="500" height="700" frameborder="0" marginheight="0" marginwidth="0"&gt;Loading...&lt;/iframe&gt;
+<iframe src="https://forms.gle/EqQKx4nLQQemQZWb8" width="500" height="700" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
 
 ---
 # Reproducible Reports: R Markdown
@@ -122,7 +141,7 @@ background-size: 200px
 
 # Reproducible Reports: R Markdown
 
-The brilliance of R Markdown (Allaire, Xie, McPherson, Luraschi, Ushey, Atkins, Wickham, Cheng, Chang, and Iannone, 2019; Xie, Allaire, and Grolemund, 2018) is that you can use a **single R Markdown file** to:
+The brilliance of R Markdown `r Cite(myBib, "markdown1", "markdown2", .opts = list(max.names= 1))` is that you can use a **single R Markdown file** to:
 
 * save and execute code  
 
@@ -225,7 +244,7 @@ background-size: 100px
 * code chunk options control whether the code and its output end up in your 'knitted' document  
 * comments   
   * in a code chunk the \# is still used for comments  
-  * in the text a comment is written like this  &lt;!\-\- a comment \-\-&gt;
+  * in the text a comment is written like this  <!\-\- a comment \-\->
   * but use Ctrl+Shift+C  
 * \# in the text indicate headings  
 
@@ -266,7 +285,7 @@ Set some **default** code chunk options. I recommend these:
 
 
 ````
-```{r setup, include=FALSE}
+```{r setup, include=FALSE}`r ''`
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE,
                       message = FALSE)
@@ -297,8 +316,8 @@ References and citations can be added by creating a .bib file containing referen
 --
 
 Citations are added using:
-  *  blah blah blah `[@xaringan]` for blah blah blah (Xie, 2019).    
-  *  Xie `[-@xaringan]` said blah blah blah for Xie (2019) said blah blah blah.  
+  *  blah blah blah `[@xaringan]` for blah blah blah `r Cite(myBib, "xaringan")`.    
+  *  Xie `[-@xaringan]` said blah blah blah for `r Cite(myBib, "xaringan",textual = TRUE)` said blah blah blah.  
 
 --
 
@@ -370,7 +389,7 @@ Load the tidyverse
 
 .pull-left[
 ````
-```{r packages}
+```{r packages}`r ''`
 library(tidyverse)
 
 ```
@@ -425,10 +444,10 @@ Insert a code chunk for importing the data
 
 
 ````
-```{r import}
+```{r import}`r ''`
 # Data import
 # the data are organised in to three columns, one for each species. 
-seal &lt;- read.table("raw_data/seal.txt", header = TRUE)
+seal <- read.table("raw_data/seal.txt", header = TRUE)
 ```
 ````
 
@@ -447,10 +466,10 @@ Note you can run the code interactively to check your progress and the output wi
 
 
 ````
-```{r import}
+```{r import}`r ''`
 # Data import
 # the data are organised in to three columns, one for each species. 
-seal &lt;- read.table("raw_data/seal.txt", header = TRUE)
+seal <- read.table("raw_data/seal.txt", header = TRUE)
 str(seal)
 ```
 ````
@@ -478,9 +497,9 @@ background-size: 100px
 Insert a code chunk for tidying the data and writing it out to a file
 
 ````
-```{r tidy}
+```{r tidy}`r ''`
 # put the data in tidy format
-seal2 &lt;- gather(data = seal, key = species, value = myoglobin)
+seal2 <- gather(data = seal, key = species, value = myoglobin)
 
 # write tidy data to processed
 write.table(seal2, 
@@ -509,9 +528,9 @@ Insert a code chunk for summarising the data
 ### Summarising data
 
 ````
-```{r summarise}
-sealsummary &lt;- seal %&gt;% 
-  group_by(species) %&gt;% 
+```{r summarise}`r ''`
+sealsummary <- seal %>% 
+  group_by(species) %>% 
   summarise(mean = mean(myoglobin),
             std = sd(myoglobin),
             n = length(myoglobin),
@@ -532,7 +551,9 @@ background-size: 100px
 
 And run (ctrl-enter)
 
-&lt;img src="pics/sealsummary.png" width="700px" /&gt;
+```{r, out.width = "700px", echo=FALSE}
+knitr::include_graphics("pics/sealsummary.png")
+```
 
 --
 
@@ -560,7 +581,7 @@ The squareroot of 2 is ` `r`  `sqrt(2)` ` ` `
 
 you will get 
 
-The squareroot of 2 is  1.4142136
+The squareroot of 2 is  `r sqrt(2)`
 
 ---
 background-image: url(pics/rmarkdown.png)
@@ -600,15 +621,15 @@ Insert a code chunk extracting values to make inline reporting easier
 Don't worry too much about completely understanding the code
 
 ````
-```{r extract}
+```{r extract}`r ''`
 # extract values for inline reporting
 
-highestmean &lt;- max(sealsummary$mean)
-highestse &lt;- sealsummary$se[sealsummary$mean == highestmean]
-highestspp &lt;- sealsummary$species[sealsummary$mean == highestmean]
-lowestmean &lt;- min(sealsummary$mean)
-lowestse &lt;- sealsummary$se[sealsummary$mean == lowestmean]
-lowestspp &lt;- sealsummary$species[sealsummary$mean == lowestmean]
+highestmean <- max(sealsummary$mean)
+highestse <- sealsummary$se[sealsummary$mean == highestmean]
+highestspp <- sealsummary$species[sealsummary$mean == highestmean]
+lowestmean <- min(sealsummary$mean)
+lowestse <- sealsummary$se[sealsummary$mean == lowestmean]
+lowestspp <- sealsummary$species[sealsummary$mean == lowestmean]
 
 ```
 ````
@@ -638,7 +659,7 @@ background-size: 100px
 
 You can include special characters in a markdown document using LaTeX markup. This has \$ signs on the outside and uses backslashes and curly braces to indicate that what follows should be interpreted as a special character of special formatting.
 
-For example, to get `\(\bar{x} \pm s.e.\)` you write `$\bar{x} \pm s.e.$`
+For example, to get $\bar{x} \pm s.e.$ you write `$\bar{x} \pm s.e.$`
 
 
 
@@ -676,18 +697,9 @@ http://rmarkdown.rstudio.com/index.html
 ---
 # References
 
-Allaire, J, Y. Xie, J. McPherson, et al. (2019). _rmarkdown:
-Dynamic Documents for R_. R package version 1.16. URL:
-[https://github.com/rstudio/rmarkdown](https://github.com/rstudio/rmarkdown).
-
-Xie, Y. (2019). _xaringan: Presentation Ninja_. R package version
-0.12. URL:
-[https://CRAN.R-project.org/package=xaringan](https://CRAN.R-project.org/package=xaringan).
-
-Xie, Y, J. Allaire, and G. Grolemund (2018). _R Markdown: The
-Definitive Guide_. ISBN 9781138359338. Boca Raton, Florida:
-Chapman and Hall/CRC. URL:
-[https://bookdown.org/yihui/rmarkdown](https://bookdown.org/yihui/rmarkdown).
+```{r refs, echo=FALSE, results="asis"}
+PrintBibliography(myBib, .opts = list(max.names = 3))
+```
 
 
 
@@ -695,10 +707,10 @@ Chapman and Hall/CRC. URL:
 class: inverse
 
 # Congratulations! Keep practising!
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
+<br>
+<br>
+<br>
+<br>
 Emma Rand 
 
 emma.rand@york.ac.uk
@@ -708,99 +720,8 @@ Twitter: [@er13_r](https://twitter.com/er13_r)
 github: [3mmaRand](https://github.com/3mmaRand)
 
 blog: https://buzzrbeeline.blog/
-&lt;br&gt;
+<br>
 
 .footnote[
-&lt;a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"&gt;&lt;img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /&gt;&lt;/a&gt;&lt;br /&gt;&lt;span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"&gt; R Markdown - Reproducible Analyses&lt;/span&gt; by &lt;span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName"&gt;Emma Rand&lt;/span&gt; is licensed under a &lt;a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"&gt;Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License&lt;/a&gt;.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"> R Markdown - Reproducible Analyses</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Emma Rand</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 ]
-    </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
-<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
-});
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
-  window.dispatchEvent(new Event('resize'));
-});
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
-  if (!r) return;
-  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
-  d.head.appendChild(s);
-})(document);
-
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
-})();</script>
-
-<script>
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
-
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
-  }
-};
-slideshow._releaseMath(document);
-</script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-(function () {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
-  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
-    script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>

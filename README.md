@@ -1,7 +1,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3333877.svg)](https://doi.org/10.5281/zenodo.3333877)
 
-# R Markdown - Reproducible Analyses 
+# An Introduction to R Markdown for Reproducible Analyses 
 
 A [University of York Maths Skills Centre](https://www.york.ac.uk/students/studying/skills/maths-skills-centre/) two-hour in Continuing Professional Development course held 9 December 2019.
 
@@ -32,6 +32,6 @@ Laptops should have the following installed **prior** to attending the workshop:
 
 ## Slides
 
-[Slides](https://3mmarand.github.io/rbs_intro_london/#1)
+[Slides](https://3mmarand.github.io/MSSC-maths-and-stats-week/)
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"> R Markdown - Reproducible Analyses</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Emma Rand</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
