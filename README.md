@@ -1,9 +1,9 @@
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3333877.svg)](https://doi.org/10.5281/zenodo.3333877)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3670893.svg)](https://doi.org/10.5281/zenodo.3670893)
 
 # An Introduction to R Markdown for Reproducible Analyses 
 
-A [University of York Maths Skills Centre](https://www.york.ac.uk/students/studying/skills/maths-skills-centre/) two-hour in Continuing Professional Development course held 9 December 2019.
+A [University of York Maths Skills Centre](https://www.york.ac.uk/students/studying/skills/maths-skills-centre/) two-hour in Continuing Professional Development course held 13 Feb 2020 as part of Maths and Stats week
 
 ## Overview
 
